@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Main from './Main';
@@ -201,7 +201,7 @@ function App() {
               />
             </Route>
             <ProtectedRoute
-              exact path="/"
+              path="/react-mesto-auth"
               loggedIn={loggedIn}
               component={Main}
               onEditAvatar={handleEditAvatarClick}
@@ -212,6 +212,9 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
             />
+            <Route path="/">
+              {loggedIn ? <Redirect to="/react-mesto-auth" /> : <Redirect to="/sign-in" />}
+            </Route>
           </Switch>
           <Footer />
           <InfoTooltip

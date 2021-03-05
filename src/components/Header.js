@@ -16,7 +16,7 @@ function Header({ signOut, userEmail }) {
           <Link className="header__link" to="/sign-in">Вход</Link>
         </header>
       </Route>
-      <Route exact path="/">
+      <Route path="/react-mesto-auth">
         <header className="header">
           <img src={logoMesto} alt="Логотип Mesto" className="header__logo" />
           <div className="header__items">
