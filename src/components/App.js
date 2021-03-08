@@ -42,7 +42,7 @@ function App() {
     }
     document.addEventListener('keydown', handleEscClose);
     return () => document.removeEventListener('keydown', handleEscClose)
-  })
+  }, [isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen, isOpenPhotoPopup, isOpenInfoToolTip])
 
   React.useEffect(() => {
     api.getUserData()
