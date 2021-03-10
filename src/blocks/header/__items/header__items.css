@@ -3,3 +3,13 @@
   grid-template-columns: repeat(2, minmax(min-content, max-content));
   gap: 24px;
 }
+
+@media screen and (max-width: 768px) {
+  .header__items {
+    display: none;
+    grid-template-columns: minmax(min-content, max-content);
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+  }
+}

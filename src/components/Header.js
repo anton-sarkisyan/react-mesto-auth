@@ -1,7 +1,10 @@
 import logoMesto from '../images/logo-mesto.svg';
+import menu from '../images/menu-mobile.svg';
+import closeMenu from '../images/Close-Icon.svg';
+import Menu from './Menu';
 import { Route, Switch, Link } from 'react-router-dom';
 
-function Header({ signOut, userEmail }) {
+function Header({ signOut, userEmail, handleMobileMenu, isOpen }) {
   return (
     <Switch>
       <Route path="/sign-in">
@@ -17,16 +20,11 @@ function Header({ signOut, userEmail }) {
         </header>
       </Route>
       <Route path="/react-mesto-auth">
+        {isOpen && <Menu mail={userEmail} signOut={signOut} isOpen={isOpen} />}
         <header className="header">
           <img src={logoMesto} alt="Логотип Mesto" className="header__logo" />
-          <div className="header__items">
-            <p className="header__text">{userEmail}</p>
-            <Link
-              className="header__link header__link_type_main-page"
-              onClick={signOut}
-              to="/sign-in"
-            >Выйти</Link>
-          </div>
+          <div className={isOpen ? "header__close-button " : "header__menu-mobile"} onClick={handleMobileMenu} />
+          <Menu mail={userEmail} signOut={signOut} />
         </header>
       </Route>
     </Switch>

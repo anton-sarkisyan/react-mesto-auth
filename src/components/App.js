@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
@@ -179,13 +179,36 @@ function App() {
     setLoggedIn(false);
   }
 
+  // Обработка меню в мобильной версии
+  const [isOpenMobileMenu, setIsOpenMobileMenu] = React.useState(false);
+  const [widthWindow, setWidthWindow] = React.useState({ width: 0 });
+
+  function handleResizeWindow() {
+    setWidthWindow({width: window.innerWidth});
+    if (widthWindow.width > 767) {
+      setIsOpenMobileMenu(false);
+    }
+  }
+
+  React.useEffect(() => {
+    window.addEventListener('resize', handleResizeWindow);
+    return () => window.removeEventListener('resize', handleResizeWindow);
+  })
+
+  function handleMobileMenu() {
+    setIsOpenMobileMenu(!isOpenMobileMenu)
+  }
+
   return (
     <div className="page">
       <div className="page__container">
         <CurrentUserContext.Provider value={currentUser}>
           <Header
+            isOpen={isOpenMobileMenu && "header__items_opened"}
+            handleMobileMenu={handleMobileMenu}
             signOut={handleSignOut}
             userEmail={userEmail}
+            widthWindow={widthWindow}
           />
           <Switch>
             <Route path="/sign-in">
