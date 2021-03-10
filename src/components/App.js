@@ -177,6 +177,7 @@ function App() {
     localStorage.removeItem('jwt');
     setUserEmail('');
     setLoggedIn(false);
+    setIsOpenMobileMenu(false);
   }
 
   // Обработка меню в мобильной версии
@@ -184,7 +185,7 @@ function App() {
   const [widthWindow, setWidthWindow] = React.useState({ width: 0 });
 
   function handleResizeWindow() {
-    setWidthWindow({width: window.innerWidth});
+    setWidthWindow({ width: window.innerWidth });
     if (widthWindow.width > 767) {
       setIsOpenMobileMenu(false);
     }
